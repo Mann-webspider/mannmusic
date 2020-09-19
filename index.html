@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>mann music dir</title>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.14.0/css/all.css"
+        integrity="sha384-HzLeBuhoNPvSl5KYnjx0BT+WB0QEEqLprO+NBkkk5gbc67FTaL7XIGa2w1L0Xbgc" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="main_div">
+        <div class="music_div">
+            <h2 id="title">such a whore</h2>
+            <h3 id="artist">JVLA</h3>
+            <div class="img_container">
+                <img src="picture/such a whore.jpg" alt="">
+            </div>
+            <audio src="music/such a whore.mp3"></audio>
+
+            <!-- controls -->
+            <div class="music_controls">
+                <i class="fas fa-backward" id="prev"></i>
+                <i class="fas fa-play main_button" id="play"></i>
+                <i class="fas fa-forward" id="next"></i>
+            </div>
+        </div>
+    </div>
+    <!-- javascript starts here -->
+    <script>
+        let play = document.getElementById('play');
+        let music = document.querySelector('audio');
+        let img = document.querySelector('img');
+        let artist = document.getElementById('artist');
+        let title = document.getElementById('title');
+        let prev = document.getElementById('prev');
+        let next = document.getElementById('next');
+
+        let songs = [
+            {
+                name: "memba",
+                title: "memba",
+                artist: "AISHA",
+            },
+            {
+                name: "such a whore",
+                title: "such a whore",
+                artist: "JVLA",
+            },
+            {
+                name: "barso",
+                title: "barso",
+                artist: "RITVIZ",
+            },
+            {
+                name: "chalo chale",
+                title: "chalo chale",
+                artist: "RITVIZ",
+            },
+            {
+                name: "something just like this",
+                title: "something just like this",
+                artist: "THE CHAINMOSKER",
+            },
+            {
+                name: "Kangana",
+                title: "Kangana",
+                artist: "punjabi kudi",
+            },
+            {
+                name: "Falling",
+                title: "falling",
+                artist: "Trevor Danial",
+            },
+            
+        ]
+
+        let isplaying = false;
+
+        let playmusic = () => {
+            music.play();
+            isplaying = true;
+            play.classList.replace('fa-play', 'fa-pause');
+
+            img.classList.add('animate');
+        };
+
+        // for pause the music
+        let pausemusic = () => {
+            music.pause();
+            isplaying = false;
+            play.classList.replace('fa-pause', 'fa-play');
+
+            img.classList.remove('animate');
+        };
+
+        play.addEventListener('click', () => {
+            if (isplaying) {
+                pausemusic();
+            }
+            else {
+                playmusic();
+            }
+        })
+
+        // change the music
+        let loadsong = (songs) => {
+            title.textContent = songs.title;
+            artist.textContent = songs.artist;
+            music.src = "music/" + songs.name + ".mp3";
+            img.src = "picture/" + songs.name + ".jpg"
+        };
+
+        songIndex = 0;
+        let nextSong = () => {
+            songIndex = (songIndex + 1) % songs.length
+            loadsong(songs[songIndex]);
+            playmusic();
+
+        }
+
+
+        let prevSong = () => {
+            songIndex = (songIndex - 1 + songs.length) % songs.length
+            loadsong(songs[songIndex]);
+            playmusic();
+
+        }
+
+        next.addEventListener('click', nextSong);
+        prev.addEventListener('click', prevSong);
+
+
+
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/darkmode-js@1.5.7/lib/darkmode-js.min.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>
